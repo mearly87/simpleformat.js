@@ -29,13 +29,10 @@ var simpleformat = (function() {
 
 	format = function(value, format, mask, escapeCharacter)
 	{
-		var numberRegex = new RegExp(escapeCharacter,"g"),
-		numberCount = (format.match(numberRegex)||[]).length,
-		rawInput = value;
+		var oldVal = value,
 		newVal = '';
-		index = 0;
 		for(var i = 0; i < format.length; i++) {
-			var nextChar = rawInput.substring(0,1),
+			var nextChar = oldVal.substring(0,1),
 			nextFormat = format[i];
 			if (nextFormat != nextChar && nextFormat == escapeCharacter) {
                 if (mask.test(nextChar)) {
@@ -43,13 +40,13 @@ var simpleformat = (function() {
                 } else {
                     i--;   
                 }
-				rawInput = rawInput.substring(1);
-				if (rawInput.length === 0) {
+				oldVal = oldVal.substring(1);
+				if (oldVal.length === 0) {
 					break;
                 }
 			} else if (nextChar == nextFormat) {
                 newVal += nextFormat;
-                rawInput = rawInput.substring(1);
+                oldVal = oldVal.substring(1);
             } else if (nextFormat != escapeCharacter) {
 				newVal += nextFormat;
             }
