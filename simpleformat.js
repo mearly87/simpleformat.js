@@ -56,8 +56,9 @@ var simpleformat = (function() {
 
 	formatInput = function(obj, event, format, mask, escapeCharacter) {
 		escapeCharacter = escapeCharacter || 'X';
+        mask = mask || /\d/;
 		if(isCharacterKeyPress(event)) {
-			var newVal = this.format(obj.value, format, escapeCharacter, mask);
+			var newVal = this.format(obj.value, format, mask, escapeCharacter);
             if (newVal != obj.value) {
                 cursor = getNewCursorPosition(obj.selectionStart, obj.value, newVal, format.length, mask);
                 obj.value = newVal;
