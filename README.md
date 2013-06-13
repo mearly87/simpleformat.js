@@ -21,17 +21,17 @@ We fire off the format onkeyup so that every time a user types a character the f
 It's easy to define your own formats too. Here is the code that defines a phone format without an area code:
 
 ```javascript
-    odo.helpers.formatPhone = function(obj, event)
+    simpleformat.formatPhone = function(obj, event)
    {
 		phoneFormat = 'XXX-XXXX'
-		odo.helpers.formatInput(obj, event, phoneFormat);
+		simpleformat.formatInput(obj, event, phoneFormat);
     }
 ```
 The escape character for numbers is by default 'X'. If you want to use an 'X'. If you want to use an 'X' as part of your format, you can specifiy a different scape character in 'formatInput'. Here is an exmaple that uses the 'X' in the format to specifiy a phone extension:
 ```javascript
-    odo.helpers.formatPhone = function(obj, event)
+    simpleformat.formatPhone = function(obj, event)
     {
 		phoneFormat = '###-#### X###'
-		odo.helpers.formatInput(obj, event, phoneFormat, '#');
+		simpleformat.formatInput(obj, event, phoneFormat, '#');
     }
 ```
