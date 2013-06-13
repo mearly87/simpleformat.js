@@ -9,7 +9,7 @@ formatTaxId: __XX-XXXXXXX__
 
 formatSSN: __XXX-XX-XXXX__
 
-check it out: http://jsfiddle.net/yEdAX/4/
+check it out: http://jsfiddle.net/yEdAX/5/
 
 Here is an example that binds the format to a field:
 
@@ -35,3 +35,9 @@ The escape character for numbers is by default 'X'. If you want to use an 'X'. I
 		simpleformat.formatInput(obj, event, phoneFormat, '#');
     }
 ```
+
+
+## To Do:
+
+- [ ] Allow arbitraury masks for input (currently only allows numbers)
+- [ ] Allow characters that match the mask (right now only numbers) in the format string (i.e. +1 (XXX) XXX-XXXX for phone numbers)
