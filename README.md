@@ -9,7 +9,7 @@ formatTaxId: __XX-XXXXXXX__
 
 formatSSN: __XXX-XX-XXXX__
 
-check it out: http://jsfiddle.net/yEdAX/1/
+check it out: http://jsfiddle.net/yEdAX/3/
 
 Here is an example that binds the format to a field:
 
