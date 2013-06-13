@@ -11,9 +11,9 @@ var simpleformat = (function() {
             return !evt.ctrlKey && !evt.metaKey && !evt.altKey && evt.which != 8;
         }
         return false;
-	};
+	},
 
-	var getNewCursorPosition = function(cursor, startVal, endVal, formatLength) {
+	getNewCursorPosition = function(cursor, startVal, endVal, formatLength) {
 		newChar = startVal.charAt(cursor - 1),
 		nextCharInfo = startVal.substring(cursor, formatLength).match(/\d/),
 		nextChar = (nextCharInfo ||[])[0],
@@ -25,9 +25,9 @@ var simpleformat = (function() {
 			return endVal.substring(nextCharPos).indexOf(nextChar) + nextCharPos;
 		}
 		return -1;
-	};
+	},
 
-	var format = function(value, format, escapeCharacter)
+	format = function(value, format, escapeCharacter)
 	{
 		var numberRegex = new RegExp(escapeCharacter,"g"),
 		numberCount = (format.match(numberRegex)||[]).length,
@@ -48,9 +48,9 @@ var simpleformat = (function() {
 			}
 		}
 		return newVal;
-	};
+	},
 
-	var formatInput = function(obj, event, format, escapeCharacter) {
+	formatInput = function(obj, event, format, escapeCharacter) {
 		escapeCharacter = escapeCharacter || 'X';
 		if(isCharacterKeyPress(event)) {
 			var newVal = this.format(obj.value, format, escapeCharacter);
