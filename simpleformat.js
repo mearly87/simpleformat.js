@@ -13,12 +13,12 @@ var simpleformat = (function() {
         return false;
 	},
 
-	getNewCursorPosition = function(cursor, startVal, endVal, formatLength) {
+	getNewCursorPosition = function(cursor, startVal, endVal, formatLength, mask) {
 		newChar = startVal.charAt(cursor - 1),
-		nextCharInfo = startVal.substring(cursor, formatLength).match(/\d/),
+		nextCharInfo = startVal.substring(cursor, formatLength).match(mask),
 		nextChar = (nextCharInfo ||[])[0],
 		nextCharPos = (nextCharInfo ||{}).index + cursor;
-		if(newChar.match(/[^\d]/)) {
+		if(!newChar.match(mask)) {
 			return cursor - 1;
 		}
 		if(nextChar) {
@@ -27,35 +27,42 @@ var simpleformat = (function() {
 		return -1;
 	},
 
-	format = function(value, format, escapeCharacter)
+	format = function(value, format, mask, escapeCharacter)
 	{
 		var numberRegex = new RegExp(escapeCharacter,"g"),
 		numberCount = (format.match(numberRegex)||[]).length,
-		rawInput = value.replace(/[^\d]/g, '').substring(0,numberCount);
+		rawInput = value;
 		newVal = '';
 		index = 0;
 		for(var i = 0; i < format.length; i++) {
 			var nextChar = rawInput.substring(0,1),
 			nextFormat = format[i];
-			if (nextFormat == escapeCharacter) {
-				newVal += nextChar;
+			if (nextFormat != nextChar && nextFormat == escapeCharacter) {
+                if (mask.test(nextChar)) {
+                    newVal += nextChar;
+                } else {
+                    i--;   
+                }
 				rawInput = rawInput.substring(1);
 				if (rawInput.length === 0) {
 					break;
-				}
-			} else {
+                }
+			} else if (nextChar == nextFormat) {
+                newVal += nextFormat;
+                rawInput = rawInput.substring(1);
+            } else if (nextFormat != escapeCharacter) {
 				newVal += nextFormat;
-			}
+            }
 		}
 		return newVal;
 	},
 
-	formatInput = function(obj, event, format, escapeCharacter) {
+	formatInput = function(obj, event, format, mask, escapeCharacter) {
 		escapeCharacter = escapeCharacter || 'X';
 		if(isCharacterKeyPress(event)) {
-			var newVal = this.format(obj.value, format, escapeCharacter);
+			var newVal = this.format(obj.value, format, escapeCharacter, mask);
             if (newVal != obj.value) {
-                cursor = getNewCursorPosition(obj.selectionStart, obj.value, newVal, format.length);
+                cursor = getNewCursorPosition(obj.selectionStart, obj.value, newVal, format.length, mask);
                 obj.value = newVal;
                 if (cursor != -1) {
                     if(obj.setSelectionRange) {
@@ -67,7 +74,6 @@ var simpleformat = (function() {
 	};
     return {format : format, formatInput: formatInput};
 })();
-
 
 simpleformat.formatPhone = function(obj, event)
 {
