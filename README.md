@@ -14,7 +14,7 @@ check it out: http://jsfiddle.net/yEdAX/3/
 Here is an example that binds the format to a field:
 
 ```html
-    <input id="business_tel" maxlength="14" name="business[tel]" onkeyup="odo.helpers.formatPhone(this, event)" >
+    <input id="business_tel" maxlength="14" name="business[tel]" onkeyup="simpleformat.formatPhone(this, event)" >
 ```
 We fire off the format onkeyup so that every time a user types a character the field automatically formats.
 
