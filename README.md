@@ -4,7 +4,9 @@ simpleformat.js
 simpleformat.js is a library that makes is extremely easy to format and mask fields like phone numbers and social security numbers. Out of the box it has three formats:
 
 formatPhone: __(XXX) XXX-XXXX__
+
 formatTaxId: __XX-XXXXXXX__
+
 formatSSN: __XXX-XX-XXXX__
 
 check it out: http://jsfiddle.net/yEdAX/1/
