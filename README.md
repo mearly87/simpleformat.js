@@ -33,7 +33,7 @@ The mask by default is /\d/ (only numbers). If you want to allow additional char
     simpleformat.serialNumberFormat = function(obj, event)
     {
 		phoneFormat = 'XXX-XXXX-XXX'
-		simpleformat.formatInput(obj, event, phoneFormat, '/\d|[a-fA-F]/');
+		simpleformat.formatInput(obj, event, phoneFormat, /\d|[a-fA-F]/);
     }
 ```
 
